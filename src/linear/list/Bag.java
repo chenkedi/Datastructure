@@ -3,6 +3,7 @@ package linear.list;
 import java.util.Iterator;
 
 /**
+ * 背包类
  * 不能删除集合中元素，且迭代访问集合元素时与元素加入的顺序无关
  * 一个纯粹的包含多个元素的集合类
  * @author chenkedi

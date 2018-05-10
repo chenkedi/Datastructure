@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="vmParameters" value="-XX:MaxPermSize=384M -DsocksProxyHost=127.0.0.1 -DsocksProxyPort=1086" />
+  </component>
+</project>

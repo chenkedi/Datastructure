@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 
 import java.util.Scanner;
 
+import graph.structure.Graph;
+
 /**
  * 判断图中是否有环
  * @author chenkedi

@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 import java.util.Scanner;
+
+import graph.structure.Graph;
+
 /**
  * 判断一幅图能否用两种颜色着色
  * 即一幅图是不是二分图

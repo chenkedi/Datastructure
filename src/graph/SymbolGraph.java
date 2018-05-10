@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import graph.structure.Graph;
+
 /**
  * 符号图类，用于顶点是任意字符串，且输入的图的数据的前两行中不包含顶点数和边数的情况
  * @author chenkedi
@@ -76,7 +78,8 @@ public class SymbolGraph{
 	 * @return
 	 */
 	public int index(String key){
-		return contains(key)?st.get(key):null;
+//		return contains(key)?st.get(key):null;
+		return contains(key)?st.get(key):0;
 	}
 	
 	/**

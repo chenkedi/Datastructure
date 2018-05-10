@@ -41,8 +41,18 @@ public class QuickSort extends Sort{
 			sort(a, mid + 1, q);
 		}
 	}
-	
-	
+
+
+	/**
+	 * 与i,j分别从数组两端进行扫描，分别找大于key和小于key的位置的实现不同
+	 * 此实现只有一个j指针从数组左边开始扫描，且只寻找比key小的元素，找到后，先将加i指针右移一位后（这也是为什么指针要初始化为p-1)，将其指向的元素与j指向的元素交换
+	 * 这样,当j指针移动到最后一个元素的前一个元素时（最后一个作为key),i指针指向的元素之前的为小于key的，其他的为大于key的
+	 * 但是由于key为最后一个元素，所以要将第i+1个元素（即右子数组的第一个元素与最后一个元素交换
+	 * @param a
+	 * @param p
+	 * @param q
+	 * @return
+	 */
 	private int partition(Comparable[] a, int p, int q){
 		Comparable key = a[q];
 		int i = p - 1;
@@ -55,6 +65,31 @@ public class QuickSort extends Sort{
 		//注意，如果分区值不进行这种处理的话，当数组中的元素全部相同时会造成无限的堆栈开销，最终StackOverFlow
 		//这是由于所有元素相同时，每次 i+1 都会等于 p，造成递归无法正常收敛
 		return i+1;
+	}
+
+
+    /**
+     * i,j指针分别从数组两端开始扫描，i碰到比key大的，i便停止移动；此时j开始从右开始扫描，碰到比key小的停止移动
+     * 此时交换i,j指向的元素，如此往复，直至 i >= j结束
+     * 由于我们选择数组的第一个元素作为key，所以需要将切分好的左子数组最右边的元素（此时应该是a[j]）与第一个元素进行交换即可完成切分
+     * @param a
+     * @param lo
+     * @param hi
+     * @return
+     */
+	private int partition_2(Comparable[] a, int lo, int hi) {
+		int i = lo;
+		int j = hi + 1;
+		Comparable key = a[lo];
+		while(true) {
+		    while(less(a[++i], key)) if(i == hi) break;
+		    while(less(key, a[--j])) if(j == lo) break;
+		    if (i >= j)
+		        break;
+		    exchange(a, i, j);
+        }
+        exchange(a, lo, j);
+		return j;
 	}
 	
 	private int randomPartition(Comparable[] a, int p, int q){

@@ -22,7 +22,7 @@ public class SortBenchMark {
 		
 		//对于个人计算机，6000万是极限，快速排序耗时要45秒，系统自带的三向切分需要50秒，内存耗用2G多
 		//使用插入排序优化的归并排序耗时199秒其他排序的时间未知
-		int N = 600000;
+		int N = 6000000;
 		Integer[] set= new Integer[N];
 		int element;
 		Random ra = new Random();

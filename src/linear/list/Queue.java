@@ -9,7 +9,7 @@ public class Queue<T>{
 		queue = new Object[n];
 		MAX_SIZE=n;
 	}
-	
+
 	/**
 	 * 出队
 	 * @return
@@ -36,6 +36,10 @@ public class Queue<T>{
 			tail=(tail+1)%(MAX_SIZE);
 			
 		}
+	}
+
+	public boolean isEmpty() {
+		return queue.length > 0;
 	}
 	
 	public void print(){
