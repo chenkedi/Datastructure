@@ -5,21 +5,25 @@ import java.util.Map;
 
 /**
  * 给定一个包含整数、负数和0的数组，求其中最大的和为0的连续子数组
- * 如  A[]= 7 -7 8 6  5  -5  -5  0  -6 11
- * sum[]= 7  0 8 14 19 14  9  9  3  14
- * 通过观察可以发现，前缀和为0时，该项（包括其本身）的子数组之和为0；如果有两个前缀和相等，则两种相差的数据之和为0
+ * 如  A[]= 7 -7 8  6  5  -5  -5  0  -6 11
+ *   sum[]= 7  0 8 14 19  14   9  9  3  14
+ * 通过观察可以发现，对数组遍历累加，当和为0时，该项（包括其本身）到数组索引为0的子数组之和显然为0；
+ * 若累加的和不为0，但是出现与历史累加和相同的和时，则说明历史累加和的位置（不包括该位置的数）到当前索引处（包含当前索引处的数）之间的子数列和为0
+ * 针对这两种和未0的情况，遍历数据累加，并用哈希表记住每个首次出现的累加和的索引，同时用max记住遍历到当前位置的最长和为0的子列的长度
  * 要求时间复杂度为O(n)
  * @author chenkedi
  *
  */
 public class MaxSubsetSumToZero{
 	public static void main(String args[]){
-		//int[] a = {7,-7,8,6,5,-5,-5,0,-6,11};
-		int[] a = {5,6,-7,7,5,1,2,3,-3,-2,-1};
+		int[] a = {7,-7,8,6,5,-5};
+//		int[] a = {7,-7,8,6,5,-5,-5,0,-6,11};
+//		int[] a = {5,6,-7,7,5,1,2,3,-3,-2,-1};
 		maxSubsetSumToZero(a);
 	}
 	
 	public static void maxSubsetSumToZero(int[] a){
+		// max表示遍历到当前位置，最长的和为0的子数列
 		int max=0,start=0,end=0;
 		Map<Integer,Integer> sumMap = new HashMap<>();
 		int sum=0;
@@ -38,7 +42,7 @@ public class MaxSubsetSumToZero{
 					start=index+1;
 					end=i;
 				}
-			}else{//将首次出现的前缀和存储在HashMap中，方便与以后出现的相同的前缀和对比
+			}else{//将"首次"出现的前缀和存储在HashMap中，方便与以后出现的相同的前缀和对比
 				sumMap.put(sum,i);
 			}
 		}

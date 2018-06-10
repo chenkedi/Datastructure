@@ -50,9 +50,9 @@ public class PrimMST implements MST{
                distTo[w] = edge.weight();
                // 这条边是mst到非树顶点w目前而言最小的边，如果w索引在优先队列中已经存在，则更新，否则插入
                if (pq.contains(w))
-                   pq.insert(w, edge.weight());
-               else
                    pq.change(w, edge.weight());
+               else
+                   pq.insert(w, edge.weight());
            }
        }
     }

@@ -1,20 +1,20 @@
 package basic.concepts;
 
 /**
- * 最大子列和问题的三种解法
+ * 最大连续子列和问题的三种解法
  * @author chenkedi
  *
  */
 public class MaxSubSet
 {
 	public static int[] set={-2, 11, -4, 13, -5, 2, -5, -3, 12, -9};
-
+	public static int[] setNegtive = {-2, -4, -5, -5, -3, -9};
 	public static void main(String[] args) {
 		int sum=0;
 		for(int i=0;i<=1000000000;i++){
 			//sum=MaxMethod1(set);
-			sum=MaxMethod2(set);
-			//sum=MaxMethod3(set);
+//			sum=MaxMethod2(set);
+			sum=MaxMethod3(setNegtive);
 		}
 		System.out.println(sum);
 
@@ -67,7 +67,7 @@ public class MaxSubSet
 	 */
 	public static int MaxMethod3(int[] set){
 		int maxSum=set[0],thisSum=0;
-		//为防止序列全为负数程序出现错误，先遍历一次数组，将maxSum初始化为数组中最大的负数
+		//为防止序列全为负数程序出现错误，先遍历一次数组，将maxSum初始化为数组中最大的(负)数
 		for(int i = 1; i < set.length; i++)
 			if(set[i] > maxSum)
 				maxSum = set[i];
@@ -77,7 +77,7 @@ public class MaxSubSet
 			if(thisSum<0)
 				thisSum=0;
 			else if(thisSum>maxSum){
-				maxSum=thisSum;
+				maxSum=thisSum;// 如果数列全为负，则该分支得不到执行，那么最大子列和为第一个for循环中最大的负数
 			}
 		}
 		return maxSum;

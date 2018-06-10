@@ -29,14 +29,14 @@ public class BreathFirstPaths extends Paths
 	private void bfs(Graph G, int s) {
 		Queue<Integer> queue = new LinkedList<>();
 		marked[s] = true; //标记起点
-		queue.offer(s);
+		queue.add(s);
 		while(!queue.isEmpty()){
 			int v = queue.poll();
 			for(int w : G.adj(v))
 				if(!marked[w]){
 					edgeTo[w] = v;
 					marked[w] = true;
-					queue.offer(w);
+					queue.add(w);
 				}
 		}
 		

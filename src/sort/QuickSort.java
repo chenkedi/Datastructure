@@ -171,6 +171,7 @@ public class QuickSort extends Sort{
 	/**
 	 * 注意，这里不使用临时变量的交换方式，不能正确处理对于两个引用指向同一个元素的交换，会产生交换后该值恒等于0的bug
 	 * 所以，仅当max!=i时作交换，max=i时不用做任何处理，因为他们就是本身
+     * 该方法的局限性在于只能针对整数
 	 * @param set
 	 * @param max
 	 * @param i

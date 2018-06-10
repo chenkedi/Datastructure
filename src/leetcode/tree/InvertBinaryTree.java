@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,7 +25,7 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you canâ
  * @author chenkedi
  *
  */
-public class InverseBinaryTree {
+public class InvertBinaryTree {
 
 	class TreeNode {
 

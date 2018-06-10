@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.tree;
 
 import java.util.Stack;
 
@@ -38,6 +38,17 @@ public class MaximumDepthOfBT{
             return depth;
         return Math.max(maxDepth(node.left,depth+1),maxDepth(node.right,depth+1));
     }
+
+	/**
+	 * 递归法2
+	 * @param node
+	 * @return
+	 */
+	public int maxDepth2(TreeNode node) {
+    	if(node == null)
+    		return 0;
+    	return Math.max(maxDepth2(node.left), maxDepth2(node.right)) + 1;
+	}
     
     /**
      * 非递归，用栈模拟。不知道为何不正确
