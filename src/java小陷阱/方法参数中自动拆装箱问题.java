@@ -2,8 +2,7 @@ package java小陷阱;
 
 
 public class 方法参数中自动拆装箱问题 {
-	    public void add(Byte b)
-	    {
+	    public void add(Byte b) {
 	        b = b++;
 	    }
 	    public void test()
