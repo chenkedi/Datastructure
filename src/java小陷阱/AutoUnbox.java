@@ -1,7 +1,7 @@
 package java小陷阱;
 
 
-public class 方法参数中自动拆装箱问题 {
+public class AutoUnbox {
 	    public void add(Byte b) {
 	        b = b++;
 	    }
@@ -16,7 +16,7 @@ public class 方法参数中自动拆装箱问题 {
 	    }
 	    
 	   public static void main(String[] args){
-		   方法参数中自动拆装箱问题 obj = new 方法参数中自动拆装箱问题();
+		   AutoUnbox obj = new AutoUnbox();
 		   obj.test();
 	   }
 }

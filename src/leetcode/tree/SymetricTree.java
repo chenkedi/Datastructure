@@ -1,5 +1,9 @@
 package leetcode.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 
@@ -59,4 +63,41 @@ public class SymetricTree {
         return false;
     }
 
+
+    /**
+     * !!!!!!错误的解法!!!!!!!!
+     * 中序遍历树，若结果关于中心对称(因为镜像树一定有基数个节点)，则树为镜像对称
+     * 该解法虽然对于某些特殊case(如下所示）不正确，但是仍有记录价值
+     *         1
+     *        / \
+     *       3   2
+     *      /   /
+     *     2   3
+     * @param root
+     * @return
+     */
+    public boolean solve_error3(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> res = new ArrayList<>();
+        TreeNode cur = root;
+        while(!stack.isEmpty() || cur != null) {
+            if(cur != null) {
+                stack.add(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                res.add(cur.val);
+                cur = cur.right;
+            }
+        }
+
+        // 检查对称位置的数是否相同
+        for(int i = 0, j = res.size() - 1; i < res.size() / 2; i++, j--) {
+            if(res.get(i).equals(res.get(j)))
+                return false;
+        }
+        return true;
+
+
+}
 }
