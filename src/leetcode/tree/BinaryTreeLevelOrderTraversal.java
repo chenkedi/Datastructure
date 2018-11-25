@@ -28,7 +28,9 @@ import apple.laf.JRSUIUtils;
 public class BinaryTreeLevelOrderTraversal {
     /**
      * 使用队列模拟的循环解法
-     * 关键在于每一次进入while循环后，queue内部的所有节点属于同一层，可通过size获得该层元素的数量
+     * 关键在于每一次进入while循环后，queue内部的所有节点属于同一层
+     * 可使用一个变量记住该层元素数量，而后出队遍历和入队就不会超过
+     * 该层元素的数目
      */
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
