@@ -55,8 +55,19 @@ public class PathSum {
     }
 
     /**
-     * 这种递归方法将上面的 if else else 的递归分支变为一个非常强的递归终止判断条件
-     * 从而将递归合并到一个方法中。但是精细计算，应该其堆栈使用深度在非满二叉数的情形下，会比上面带递归剪枝的方法开销大
+     * 该方法的核心思想为，
+     * 递归截止点往上提升
+     * 提升一层，即到达叶子节点时，sum应该与当前叶子节点
+     * 的val相等，而不是再往下递归，直到碰到null时
+     * 再判断sum是否为0
+     *
+     * 递归到叶子节点后，再往下继续递归，碰到null来判断
+     * 是否含有PathSum的方法主要的确定在与无法统一以下
+     * 输入：
+     * [],0
+     * 即树为空，且sum为0时，应该返回false，而判断sum为0
+     * 的方式无法使用同一个递归结构处理这个问题，需要拆分
+     * 成两个方法，单独处理上述case
      * @param root
      * @param sum
      * @return
@@ -64,6 +75,7 @@ public class PathSum {
     public boolean hasPathSum_2(TreeNode root, int sum) {
         if (root == null) return false;
 
+        // 此判断说明树已经到达底叶子节点，null再来判断
         if (root.left == null && root.right == null) return sum == root.val;
 
         return hasPathSum_2(root.left, sum - root.val) || hasPathSum_2(root.right, sum - root.val);

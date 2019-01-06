@@ -42,7 +42,7 @@ public class MergeTwoBinaryTrees {
         TreeNode newNode = new TreeNode(t1.val += t2.val);
         newNode.left = mergeTrees1(t1.left, t2.left);
         newNode.right = mergeTrees1(t1.right, t2.right);
-        return t1;
+        return newNode;
     }
 
 
