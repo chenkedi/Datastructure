@@ -1,0 +1,3 @@
+有解一类题目方法总结或者类似题型的题目：
+1、generateParenthese
+2、Permutation

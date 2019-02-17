@@ -21,7 +21,6 @@ import java.util.List;
  ]
  */
 public class Permutation {
-    List<List<Integer>> res = new ArrayList<>();
     public static void main(String[] args) {
        Permutation permutation = new Permutation();
         int[] nums = new int[]{1, 2, 3};
@@ -34,26 +33,27 @@ public class Permutation {
      * 使用回溯法解
      */
     public List<List<Integer>> solve_1(int[] nums) {
-        List<Integer> component = new ArrayList<>();
-        permutate(component, nums);
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> tempList = new ArrayList<>();
+        permutate(res, tempList, nums);
         return res;
     }
 
-    private void permutate(List<Integer> component, int[] nums) {
-       if(component.size() == nums.length) {
+    private void permutate(List<List<Integer>> res, List<Integer> tmpList, int[] nums) {
+       if(tmpList.size() == nums.length) {
            // 注意此处添加component中的元素到最终结果需要深度拷贝，因为component中的元素一直在动态改变
-           res.add(new ArrayList<>(component));
+           res.add(new ArrayList<>(tmpList));
            return;
        }
 
        for(int i = 0; i < nums.length; i++) {
            // 当目前的排列中不含有nums[i]时，才进行递归调用，避免元素重复
-           if(!component.contains(nums[i])) {
-               component.add(nums[i]);
+           if(!tmpList.contains(nums[i])) {
+               tmpList.add(nums[i]);
                // 递归调用，开始安排下一个元素
-               permutate(component, nums);
+               permutate(res, tmpList, nums);
                // 此时permutate已经完成一种排列，通过删除最后添加的元素来进行一次回溯，从而返回for循环探索下一种排列
-               component.remove(component.size() - 1);
+               tmpList.remove(tmpList.size() - 1);
            }
        }
     }
@@ -70,7 +70,8 @@ public class Permutation {
      */
     public List<List<Integer>> solve_2(int[] nums) {
        List<List<Integer>> res = new ArrayList<>();
-       List<Integer> ini = new LinkedList<>();
+       // 这里用arrayList或者LinkedList应该差不多，因为是删除最后一个元素，所以ArrayList不需要元素移位复制
+       List<Integer> ini = new ArrayList<>();
        // 先添加nums中的第一个数作为种子
        ini.add(nums[0]);
        res.add(ini);

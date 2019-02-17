@@ -45,4 +45,38 @@ public class GroupAnagrams {
         }
         return new ArrayList<>(res.values());
     }
+
+    /**
+     * 解法二重点在于通过重新设计各个string key的定义，将求key的复杂度由O(nlgn)下降至O（n）
+     * 一个anagram字符串的key可由不重复的字符和每个字符出现的次数来唯一确定
+     * @param strs
+     * @return
+     */
+    public static List<List<String>> solve_2(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        int[] words = new int[26];
+
+        for (String s : strs) {
+            Arrays.fill(words, 0);
+            char[] sArr = s.toCharArray();
+
+            for (int i = 0; i < sArr.length; i++) {
+                words[sArr[i] - 'a']++;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 26; i++) {
+                if (words[i] != 0) {
+                    // 核心的key设计，每个字符串可以用字符+每个字符的次数唯一定位
+                    sb.append(i + 'a').append(words[i]);
+                }
+            }
+
+
+            String key = sb.toString();
+            if (map.get(key) == null)
+                map.put(key, new ArrayList<>());
+            map.get(key).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
 }

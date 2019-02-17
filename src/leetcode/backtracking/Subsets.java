@@ -62,7 +62,6 @@ public class Subsets {
     public List<List<Integer>> solve_2(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> component = new ArrayList<>();
-        Arrays.sort(nums);
         subset(nums, res, component, 0);
         return res;
     }
@@ -74,7 +73,9 @@ public class Subsets {
             if(!component.contains(nums[i])) {
                 component.add(nums[i]);
                 // 组合数不包含重复元素，下次递归调用从当前元素的下一个元素开始，所以为i+1
-                // 这个递归调用相当于按下层可用nums中可用元素的个数，以树的形式层层展开，直到到达底部子节点层，当遍历完最后子节点层的最后
+                // (如第一个数为3，则 i + 1 = 3, 后续无元素可用，从而避免出现[3，2]）
+                // 这个递归调用相当于按下层可用nums中可用元素的个数，以树的形式层层展开，
+                // 直到到达底部子节点层，当遍历完最后子节点层的最后
                 // 一个子节点后，开始回溯
                 subset(nums, res, component, i + 1);
                 // backTracking, 通过删除最后添加的元素进行回溯

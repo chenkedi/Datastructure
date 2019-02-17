@@ -7,6 +7,7 @@ import java.util.Map;
  * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 
  * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+ * 输入保证有且仅有一个解
  *
  * Example:
  *
@@ -26,9 +27,7 @@ public class TwoSum {
         int t3 = 6;
     }
 
-    public static int[] solve(int[] nums, int target) {
-        if(nums.length == 0)
-            return new int[0];
+    public static int[] solve_1(int[] nums, int target) {
         int index_1 = 0, index_2 = 0;
         Map<Integer, Integer> reverseIndex = new HashMap<>();
         for(int i = 0; i < nums.length; i++){
@@ -46,4 +45,30 @@ public class TwoSum {
         }
         return new int[] {index_1, index_2};
     }
+
+    /**
+     * 该题最关键的问题是如何解决输入中有重复元素的问题。思考时不要将问题复杂化，比如存储重复元素的多个index等。
+     * 考虑到输入中有且仅有一个解，且target - 当前遍历的元素的值，若在当前的map中找不到，则后续遍历另一个应该
+     * 命中的数时，另外一个数一定已经在map中了。所以按序遍历数组即可
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] solve_2(int[] nums, int target) {
+
+        int[] res = new int[2];
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length ; i++) {
+            int key = target - nums[i];
+            if (map.containsKey(key)) {
+                res[0] = i;
+                res[1] = map.get(key);
+            }
+            map.put(nums[i], i);
+        }
+
+        return res;
+    }
+
+
 }

@@ -83,6 +83,36 @@ public class LetterCombinationOfPhoneNumber {
 
     }
 
+    /**
+     * 该方法与上一方法的区别在于：
+     * 1、没有使用第一个数字对应的字母作为初始种子，直接使用""空字符串做种子
+     * 2、使用了字符数组的方式，没用charAt(）方法
+     * 3、使用了Character的.getNumericValue方法，而不是 - '0'将其转为整型
+     * @param digits
+     * @return
+     */
+    public List<String> solve_3(String digits) {
+        String[] keys = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        List<String> res = new ArrayList<>();
+        char[] digitsArr = digits.toCharArray();
+        if (digitsArr.length == 0)
+            return res;
+
+
+        res.add("");
+        for (int i = 0; i < digitsArr.length; i++) {
+            int n = Character.getNumericValue(digitsArr[i]);
+            char[] charArr = keys[n].toCharArray();
+            List<String> tmpRes = new ArrayList<>();
+            for (String s : res)
+                for (char c : charArr) {
+                    tmpRes.add(s + Character.toString(c));
+                }
+            res = tmpRes;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         String digits = "23";
         LetterCombinationOfPhoneNumber combine = new LetterCombinationOfPhoneNumber();

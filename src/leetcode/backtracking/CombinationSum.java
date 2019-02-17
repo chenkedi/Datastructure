@@ -33,7 +33,8 @@ import java.util.List;
 public class CombinationSum {
 
     /**
-     * 递归解法
+     * 使用回溯法
+     * 注意递归调用中，每次循环开始的位置
      * @param candidates
      * @param target
      * @return
@@ -57,7 +58,9 @@ public class CombinationSum {
         }
         for(int i = start; i < candidates.length; i++) {
            component.add(candidates[i]);
-           // 此处不对本层栈中sum的值进行改变，从而也就不需要在后续的remove过程中将sum减去remove的元素
+            // 此处不对本层栈中sum的值进行改变，从而也就不需要在后续的remove过程中将sum减去remove的元素
+            // 注意，由于某一个数字可以重复多次，且不允许有重复组合，所以下一次start必须从i（即元素本身开始）
+            // 从i开始能避免下一层堆栈使用i之前的元素从而产生重复（如[2,2,3]和[2,3,2]就能避免
            combinationSum(candidates, target, component, res, i, sum + candidates[i]);
            component.remove(component.size() - 1);
         }
