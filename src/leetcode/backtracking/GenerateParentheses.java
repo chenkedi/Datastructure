@@ -167,6 +167,7 @@ public class GenerateParentheses {
     public void generate(List<String> res, int n, String str, int open, int close) {
         if(str.length() == 2 * n)
             res.add(str);
+        // 这里左括号数不能等于n，只能小于n的原因是，符合条件后，左括号数马上要加一。如果等于n，则左括号数量会超过一半
         if(open < n)
             generate(res, n, str + "(", open + 1, close);
         if(close < open)

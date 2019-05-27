@@ -70,11 +70,12 @@ public class Subsets {
         // 同时要深度复制component，因为该对象是重复利用的
         res.add(new ArrayList<>(component));
         for(int i = start; i < nums.length; i++) {
+            // 因为nums中本身没有重复数字，所以可以不要这个判断条件，而在res.add之后
+            // 加入判断component是否等于nums.length的判断
             if(!component.contains(nums[i])) {
                 component.add(nums[i]);
                 // 组合数不包含重复元素，下次递归调用从当前元素的下一个元素开始，所以为i+1
-                // (如第一个数为3，则 i + 1 = 3, 后续无元素可用，从而避免出现[3，2]）
-                // 这个递归调用相当于按下层可用nums中可用元素的个数，以树的形式层层展开，
+                // 这个递归调用相当于按下层nums中可用元素的个数，以树的形式层层展开，
                 // 直到到达底部子节点层，当遍历完最后子节点层的最后
                 // 一个子节点后，开始回溯
                 subset(nums, res, component, i + 1);
