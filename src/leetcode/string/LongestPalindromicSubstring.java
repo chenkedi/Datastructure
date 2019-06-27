@@ -14,16 +14,17 @@ package leetcode.string;
 /**
  * 5. Longest Palindromic Substring
  * Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
-
- Example 1:
-
- Input: "babad"
- Output: "bab"
- Note: "aba" is also a valid answer.
- Example 2:
-
- Input: "cbbd"
- Output: "bb"
+ * <p>
+ * Example 1:
+ * <p>
+ * Input: "babad"
+ * Output: "bab"
+ * Note: "aba" is also a valid answer.
+ * Example 2:
+ * <p>
+ * Input: "cbbd"
+ * Output: "bb"
+ *
  * @author chenkedi chenkedi@baidu.com
  * @date 2019/6/9
  **/
@@ -35,6 +36,7 @@ public class LongestPalindromicSubstring {
      * 其中，第一个条件表示，i和j处的字符必须相等，这个很容易理解
      * 第二个条件分两种情况表示，j - i < 3表示i到j的字符个数不超过3个（此处也可写为j - 1 + 1 <=3),此时可以直接判断i到j为回文
      * 如果超过了3个，则查看历史状态，即dp(i+1, j-1)即可
+     *
      * @param s
      * @return
      */
@@ -61,5 +63,44 @@ public class LongestPalindromicSubstring {
             }
         }
         return s.substring(start, end + 1);
+    }
+
+
+    int start = 0, end = 0;
+
+    /**
+     * 方法二 ：中心扩展法
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        if (n == 1 || n == 2)
+            return s;
+
+        for (int i = 0; i < n; i++) {
+            extend(s, i, i);
+            extend(s, i, i + 1);
+
+        }
+
+        return s.substring(start, end + 1);
+
+    }
+
+    void extend(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        // 由于left和right都是不符合条件才跳出循环的，所以我们需要回答符合条件的子串
+        left++;
+        right--;
+        if (right - left + 1 > end - start + 1) {
+            // 切记，我们要更新的是end和start，不是right和left
+            end = right;
+            start = left;
+        }
+
     }
 }
